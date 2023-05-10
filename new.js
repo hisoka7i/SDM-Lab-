@@ -1,57 +1,25 @@
-let arr = [1,2,3,4];
-console.log("hii",this.name);
+var express = require('express');
+var fs = require('fs');
+var path=require('path');
+var app = express();
+
+var ___dirname = path.resolve('./public')
+//server configuration
+app.use(express.static(path.join(__dirname,'Public')));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(___dirname + '/home.html'));
+ });
 
 
-function constructor_function(Pname,Page){
-  this.Pname=Pname;
-  this.Page=Page;
-  this.anuja=function anuja(){return("Anuja")}
-  this.showdetail=()=>{return(this.anuja())}
-}
+ app.use(express.static(path.join(__dirname,'Scripts')));
 
-var anujajr = {
-  name: "Anuja",
-  age: 90,
-  moveHouse: function(){ //method
-    return("Anuja")
-  }
-}
+ app.get('/app', function (req, res) {
+    res.sendFile(path.join(___dirname + '/app.js'));
+ });
 
-
-function IndianWelcome(){
-  return "RAM RAM TAU....";
-}
-
-function greet(message){
-  var guest = ["Anuja","Ronaldo"];
-  for(n of guest){
-    console.log(message(),n)
-  }
-}
-
-greet(IndianWelcome)
-
-greet(function(){return "hello"})
-greet(()=>"Howdy")
-// greet(anuja)
-// greet()
-
-
-
-
-let obj=new constructor_function("anuja",22)
-// let obj1 = [{Pname: "Anuja", Page: "12"}]
-// console.log(obj);
-// console.log(obj.Pname, obj.Page);
-// console.log(obj.showdetail());
-
- for(x in obj){
-   console.log(x+" "+obj[x]);
- }
-// const p="Anujasdasd"
-// console.log(obj.showdetail());
-// console.log(typeof(p));
-
-
-
-//Do in line JS
+var server = app.listen(8888, function () {
+    var host = server.address().address
+    var port = server.address().port
+    console.log("App listening at http://localhost:8888", host, port)
+});
